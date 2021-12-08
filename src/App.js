@@ -72,11 +72,14 @@ const App = () => {
     if (persons.find(person => person.name === newName)) {
       updatePerson(personObject)
     } else {
+
         numberService
         .create(personObject)
         .then(response => {
           setPersons(persons.concat(response.data))
         })
+        .catch(error => { console.log(error.response.data) || setErrorMessage(error.response.data.error)})
+
         setErrorMessage(
           `'${newName}' was added to the phonebook`
         )
